@@ -1,5 +1,26 @@
 # In This file write all the processing Functions
 
+class Node:
+    def __init__(self,row,column,colors):
+        self.row=row
+        self.column=column
+        self.possible=colors
+
+
+    def remove_color(color):
+        if color in self.possible:
+            self.possible
+
+
+
+
+
+
+
+
+
+
+
 def dumb_implementation():
 #Thoughts
 
