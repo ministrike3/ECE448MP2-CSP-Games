@@ -29,8 +29,7 @@ def puzzleDetails(lines):
     for line in lines:
         height += 1
         width = len(lines)
-    print("height:", height, "width:", width)
-    return lines
+    return height, width
 
 if __name__ == "__main__":
     games = get_list_of_test_files()
@@ -40,4 +39,5 @@ if __name__ == "__main__":
         useful_array_board = input_to_array(gameboard)
         print(useful_array_board)
         print('\n')
-        puzzleDetails(useful_array_board)
+        height, width = puzzleDetails(useful_array_board)
+        print("height:", height, "width:", width)
