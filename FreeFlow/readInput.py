@@ -24,6 +24,10 @@ def get_name(file):
     name, trash = name.split('.')
     return(name[5:])
 
+def print_free_flow(solved_maze):
+    pass
+
+
 if __name__ == "__main__":
     games=get_list_of_test_files()
     for gameboard in games:
