@@ -31,9 +31,20 @@ def puzzleDetails(lines):
         width = len(lines)
     return height, width
 
+def generateColorSet_Dict(lines):
+    colorSet = []
+    colorDict = {}
+    for line in lines:
+        for character in line:
+            if character != '_':
+                colorSet.append(character)
+            if character in colorSet:
+                colorDict[lines.index(line), line.index(character)] = character
+    colorSet = set(colorSet)
+    return colorSet, colorDict
+
 def print_free_flow(solved_maze):
     pass
-
 
 if __name__ == "__main__":
     games = get_list_of_test_files()
@@ -45,3 +56,5 @@ if __name__ == "__main__":
         print('\n')
         height, width = puzzleDetails(useful_array_board)
         print("height:", height, "width:", width)
+        colorSet, colorDict = generateColorSet_Dict(useful_array_board)
+        print("colorSet:", colorSet, "colorDict:", colorDict)
