@@ -52,7 +52,8 @@ if __name__ == "__main__":
         name = get_name(gameboard)
         print(name)
         useful_array_board = input_to_array(gameboard)
-        print(useful_array_board)
+        for row in useful_array_board:
+            print(row)
         print('\n')
         height, width = puzzleDetails(useful_array_board)
         print("height:", height, "width:", width)

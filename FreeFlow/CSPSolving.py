@@ -60,9 +60,10 @@ def get_four_neighbors_colors(solve_dict,color,coordinates,height,width):
         if sq==None:
             ncount+=1
         else:
-            testcolor=solve_dict[sq]
-            if testcolor==color:
-                scount+=1
+            if sq in solve_dict.keys():
+                testcolor=solve_dict[sq]
+                if testcolor==color:
+                    scount+=1
 
     if scount+ncount>=2:
         return(True)
