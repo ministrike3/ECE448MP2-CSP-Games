@@ -1,5 +1,6 @@
 #In this file write functions relating to File i/o
 import glob
+import copy
 
 def get_list_of_test_files():
     return glob.glob("./Inputs/Test/*")
@@ -38,13 +39,31 @@ def generateColorSet_Dict(lines):
         for character in line:
             if character != '_':
                 colorSet.append(character)
+    colorSet = set(colorSet)
+
+    for line in lines:
+        for character in line:
             if character in colorSet:
                 colorDict[lines.index(line), line.index(character)] = character
-    colorSet = set(colorSet)
     return colorSet, colorDict
 
-def print_free_flow(solved_maze):
-    pass
+def print_free_flow(solved_maze,height,width):
+    # (row,column)
+    out=[]
+    outline = []
+    for i in range(0,width):
+        outline.append('_')
+    for i in range(0,height):
+        out.append(outline[:])
+
+    for key in solved_maze.keys():
+        row=key[0]
+        col=key[1]
+        out[row][col]=solved_maze[key]
+    for line in out:
+        print(line)
+
+
 
 if __name__ == "__main__":
     games = get_list_of_test_files()

@@ -4,7 +4,7 @@ from CSPSolving import *
 
 
 
-def dumb_solver(solve_dict,height,width,color_set):
+def dumb_solver(solve_dict,height,width,color_set,initial_points):
     # Thoughts
 
     # For every empty square, form a set of possible colours for that square, and then repeatedly perform
@@ -21,15 +21,16 @@ def dumb_solver(solve_dict,height,width,color_set):
 
     # When picking a square to branch on, it's generally a good idea to pick a square with
     # as few allowed colours as possible.
-
-
-    for current_coordinates in get_next_variable_to_assign(solve_dict,height,width):
+    getnext=get_next_variable_to_assign(solve_dict,height,width)
+    for current_coordinates in getnext:
         for color in color_set:
-            print("Attempting to Put " + color + " IN " + str(current_coordinates))
-            if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width):
+            #print("Attempting to Put " + color + " IN " + str(current_coordinates))
+            if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
                 print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
-                recursive_call = dumb_solver(solve_dict,height,width,color_set)
+                print(solve_dict)
+                print_free_flow(solve_dict, height, width)
+                recursive_call = dumb_solver(solve_dict,height,width,color_set,initial_points)
                 print('recurisive called')
                 if recursive_call != None:
                     return recursive_call
@@ -59,5 +60,7 @@ if __name__ == "__main__":
         print("height:", height, "width:", width)
         color_set, solve_dict = generateColorSet_Dict(useful_array_board)
         print("colorSet:", color_set, "colorDict:", solve_dict)
-
-        blah=dumb_solver(solve_dict,height,width,color_set)
+        #print_free_flow(solve_dict, height, width)
+        initial_points = solve_dict.copy()
+        solved_maze=dumb_solver(solve_dict,height,width,color_set,initial_points)
+        print_free_flow(solved_maze,height,width)
