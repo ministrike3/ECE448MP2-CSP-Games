@@ -38,11 +38,9 @@ def generateColorSet_Dict(lines):
         for character in line:
             if character != '_':
                 colorSet.append(character)
-    set(colorSet)
-    for line in lines:
-        for character in line:
             if character in colorSet:
                 colorDict[lines.index(line), line.index(character)] = character
+    colorSet = set(colorSet)
     return colorSet, colorDict
 
 def print_free_flow(solved_maze):
