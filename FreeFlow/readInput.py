@@ -10,6 +10,9 @@ def get_list_of_smaller_files():
 def get_list_of_smaller_files():
     return glob.glob("./Inputs/Bigger/*")
 
+def get_list_of_solved_files():
+    return glob.glob("./Inputs/Solved/*")
+
 def input_to_array(file):
     lines = []
     for line in open(file):
@@ -43,18 +46,27 @@ def generateColorSet_Dict(lines):
     colorSet = set(colorSet)
     return colorSet, colorDict
 
-def print_free_flow(solved_maze):
-    pass
+def print_free_flow(width, height, solvedMaze, filename):
+    output_maze = open(filename, 'w')
+    printlist = []
+    for x in range(width):
+        for y in range(height):
+            if (x, y) not in solvedMaze:
+                printlist.append('_')
+            else:
+                printlist.append(solvedMaze[(x, y)])
+    return output_maze.write(str(printlist))
+
 
 if __name__ == "__main__":
-    games = get_list_of_test_files()
+    games = get_list_of_solved_files()
     for gameboard in games:
         name = get_name(gameboard)
         print(name)
         useful_array_board = input_to_array(gameboard)
-        print(useful_array_board)
         print('\n')
         height, width = puzzleDetails(useful_array_board)
-        print("height:", height, "width:", width)
         colorSet, colorDict = generateColorSet_Dict(useful_array_board)
-        print("colorSet:", colorSet, "colorDict:", colorDict)
+        filename = 'Outputs/%s.txt' %name
+        solvedMaze = print_free_flow(width, height, colorDict, filename)
+        print("SolvedMaze:", solvedMaze)
