@@ -21,7 +21,6 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
 
     for_location = get_four_neighbors_colors(solve_dict, color, coordinates, height, width)
     if for_location == False:
-        #print('Failed because level 1 neighbors are poopoo')
         return (False)
 
     neighboring_squares=get_four_neighbors(coordinates,height,width)
@@ -33,13 +32,11 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
                     if solve_dict[square]==color:
                         for_this_square=check_pipe_continuity(solve_dict, color, square, height, width)
                         if for_this_square==False:
-                            #print('Failed because level 2 neighbors are poopoo')
                             return(False)
 
     for square in initial_points.keys():
         for_this_initial=get_four_neighbors_colors_initial(solve_dict, initial_points[square], square, height, width)
         if for_this_initial==False:
-            #print('Failed because for_this_initial_failed')
             return(False)
 
     solve_copy = solve_dict.copy()
@@ -48,12 +45,10 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
     for square in solve_copy.keys():
         goodspot=is_this_a_good_spot(solve_copy,solve_copy[square],square,height,width)
         if goodspot==False:
-            #print('Failed because for_this_is_not_a_good_spot')
             return(False)
 
         is_there_a_zig_zag= zig_zag_check(solve_copy,solve_copy[square], square, height, width)
         if is_there_a_zig_zag==True:
-            #print('Failed because for_there_is_a_zig_zag')
             return(False)
 
     return(True)
