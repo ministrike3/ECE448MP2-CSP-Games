@@ -289,6 +289,13 @@ def zig_zag_check(solve_dict,color,coordinates,height,width):
     return is_there_a_zig_zag
 
 def check_pipe_continuity(solve_dict, color, square, height, width):
+    #What do I want this function to do?
+
+    #Given a non-initial sqaure, check to see if it is possible for this square to exist as part of a pipe
+    #This means, check to see if it has two neighbors that are the same color as it
+    #Or one same and at least one blank
+    #or two blanks
+
     neighbors=get_four_neighbors(square,height,width)
     no_sq_count = 0
     same_count = 0
