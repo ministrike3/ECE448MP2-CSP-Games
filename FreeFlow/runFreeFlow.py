@@ -21,6 +21,8 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
 
     # When picking a square to branch on, it's generally a good idea to pick a square with
     # as few allowed colours as possible.
+    if len(solve_dict)==25:
+        return solve_dict
     getnext=get_next_variable_to_assign(solve_dict,height,width)
     for current_coordinates in getnext:
         for color in color_set:
@@ -28,13 +30,11 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
             if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
                 print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
-                print(solve_dict)
                 print_free_flow(solve_dict, height, width)
                 recursive_call = dumb_solver(solve_dict,height,width,color_set,initial_points)
-                print('recurisive called')
                 if recursive_call != None:
                     return recursive_call
-                print('darn had to pop')
+                print('Had to Pop '+color+' From '+str(current_coordinates))
                 solve_dict.pop(current_coordinates)
     return None
 
@@ -63,4 +63,5 @@ if __name__ == "__main__":
         #print_free_flow(solve_dict, height, width)
         initial_points = solve_dict.copy()
         solved_maze=dumb_solver(solve_dict,height,width,color_set,initial_points)
+        print('\n')
         print_free_flow(solved_maze,height,width)
