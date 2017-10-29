@@ -17,23 +17,25 @@ def get_next_variable_to_assign(solution_set,height,width):
             if (row, column) not in solution_set:
                 yield (row, column)
 
-
-
 def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initial_points):
 
+    for_location = get_four_neighbors_colors(solve_dict, color, coordinates, height, width)
+    if for_location == False:
+        return (False)
+
     neighboring_squares=get_four_neighbors(coordinates,height,width)
-    neighboring_squares.append(coordinates)
+
     for square in neighboring_squares:
         if square != None:
             if square not in initial_points.keys():
                 for_this_square=get_four_neighbors_colors(solve_dict, color, square, height, width)
                 if for_this_square==False:
                     return(False)
+
     for square in initial_points.keys():
         for_this_initial=get_four_neighbors_colors_initial(solve_dict, initial_points[square], square, height, width)
         if for_this_initial==False:
             return(False)
-
 
     for square in solve_dict.keys():
         goodspot=is_this_a_good_spot(solve_dict,solve_dict[square],square,height,width)
@@ -41,18 +43,6 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
             return(False)
 
     return(True)
-
-
-    #For this function, I need to check the various basic constraints. The first thing to do is to ses
-    #If the surrounding squares have either:
-    # 2 Blank, or 1 Blank and 1 Same, or no blank and 2 same
-    #So First, call get four_neighbors_colors!
-
-
-
-
-# IF it has 4 neighbors, then it is ok to color if
-# 2+ Blank, or 1/2 Blank and 1/2 Same, or no blank and 2 same but not 3 same
 
 def get_four_neighbors(coordinates,height,width):
     neighbors=[]
@@ -222,3 +212,6 @@ def is_this_a_good_spot(solve_dict,color,coordinates,height,width):
         if same_count==0:
             return(False)
     return(True)
+
+def zig_zag_check(solve_dict,color,coordinates,height,width):
+    pass
