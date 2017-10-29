@@ -1,5 +1,6 @@
 #In this file write functions relating to File i/o
 import glob
+import copy
 
 def get_list_of_test_files():
     return glob.glob("./Inputs/Test/*")
@@ -41,12 +42,32 @@ def generateColorSet_Dict(lines):
         for character in line:
             if character != '_':
                 colorSet.append(character)
+    colorSet = set(colorSet)
+
+    for line in lines:
+        for character in line:
             if character in colorSet:
                 colorDict[lines.index(line), line.index(character)] = character
-    colorSet = set(colorSet)
     return colorSet, colorDict
 
-def print_free_flow(width, height, solvedMaze, filename):
+def print_free_flow(solved_maze,height,width):
+    # (row,column)
+    out=[]
+    outline = []
+    for i in range(0,width):
+        outline.append('_')
+    for i in range(0,height):
+        out.append(outline[:])
+
+    for key in solved_maze.keys():
+        row=key[0]
+        col=key[1]
+        out[row][col]=solved_maze[key]
+    for line in out:
+        print(line)
+
+
+def print_free_flow_file(width, height, solvedMaze, filename):
     output_maze = open(filename, 'w')
     printlist = []
     for x in range(width):
@@ -56,6 +77,7 @@ def print_free_flow(width, height, solvedMaze, filename):
             else:
                 printlist.append(solvedMaze[(x, y)])
     return output_maze.write(str(printlist))
+
 
 
 if __name__ == "__main__":
@@ -68,5 +90,5 @@ if __name__ == "__main__":
         height, width = puzzleDetails(useful_array_board)
         colorSet, colorDict = generateColorSet_Dict(useful_array_board)
         filename = 'Outputs/%s.txt' %name
-        solvedMaze = print_free_flow(width, height, colorDict, filename)
+        solvedMaze = print_free_flow_file(width, height, colorDict, filename)
         print("SolvedMaze:", solvedMaze)
