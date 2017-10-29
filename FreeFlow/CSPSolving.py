@@ -21,6 +21,7 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
 
     for_location = get_four_neighbors_colors(solve_dict, color, coordinates, height, width)
     if for_location == False:
+        #print('Failed because level 1 neighbors are poopoo')
         return (False)
 
     neighboring_squares=get_four_neighbors(coordinates,height,width)
@@ -28,18 +29,31 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
     for square in neighboring_squares:
         if square != None:
             if square not in initial_points.keys():
-                for_this_square=get_four_neighbors_colors(solve_dict, color, square, height, width)
-                if for_this_square==False:
-                    return(False)
+                if square in solve_dict.keys():
+                    if solve_dict[square]==color:
+                        for_this_square=check_pipe_continuity(solve_dict, color, square, height, width)
+                        if for_this_square==False:
+                            #print('Failed because level 2 neighbors are poopoo')
+                            return(False)
 
     for square in initial_points.keys():
         for_this_initial=get_four_neighbors_colors_initial(solve_dict, initial_points[square], square, height, width)
         if for_this_initial==False:
+            #print('Failed because for_this_initial_failed')
             return(False)
 
-    for square in solve_dict.keys():
-        goodspot=is_this_a_good_spot(solve_dict,solve_dict[square],square,height,width)
+    solve_copy = solve_dict.copy()
+    solve_copy[coordinates] = color
+
+    for square in solve_copy.keys():
+        goodspot=is_this_a_good_spot(solve_copy,solve_copy[square],square,height,width)
         if goodspot==False:
+            #print('Failed because for_this_is_not_a_good_spot')
+            return(False)
+
+        is_there_a_zig_zag= zig_zag_check(solve_copy,solve_copy[square], square, height, width)
+        if is_there_a_zig_zag==True:
+            #print('Failed because for_there_is_a_zig_zag')
             return(False)
 
     return(True)
@@ -214,4 +228,127 @@ def is_this_a_good_spot(solve_dict,color,coordinates,height,width):
     return(True)
 
 def zig_zag_check(solve_dict,color,coordinates,height,width):
-    pass
+    neighbors=get_four_neighbors(coordinates, height, width)
+    up=neighbors[0]
+    down=neighbors[1]
+    left=neighbors[2]
+    right=neighbors[3]
+    is_there_a_zig_zag=False
+
+    if up!=None:
+        if up in solve_dict.keys():
+            up_color = solve_dict[up]
+            if up_color == color:
+
+                if left != None:
+                    if left in solve_dict.keys():
+                        left_color=solve_dict[left]
+                        if left_color==color:
+                            row=left[0]
+                            col=left[1]
+                            need_to_check=(row-1,col)
+                            if need_to_check in solve_dict.keys():
+                                possible_zig=solve_dict[need_to_check]
+                                if possible_zig==color:
+                                    is_there_a_zig_zag=True
+                if right != None:
+                    if right in solve_dict.keys():
+                        right_color=solve_dict[right]
+                        if right_color==color:
+                            row=right[0]
+                            col=right[1]
+                            need_to_check=(row-1,col)
+                            if need_to_check in solve_dict.keys():
+                                possible_zig=solve_dict[need_to_check]
+                                if possible_zig==color:
+                                    is_there_a_zig_zag=True
+
+    if down!=None:
+        if down in solve_dict.keys():
+            down_color = solve_dict[down]
+            if down_color == color:
+
+                if left != None:
+                    if left in solve_dict.keys():
+                        left_color=solve_dict[left]
+                        if left_color==color:
+                            row=left[0]
+                            col=left[1]
+                            need_to_check=(row+1,col)
+                            if need_to_check in solve_dict.keys():
+                                possible_zig=solve_dict[need_to_check]
+                                if possible_zig==color:
+                                    is_there_a_zig_zag=True
+                if right != None:
+                    if right in solve_dict.keys():
+                        right_color=solve_dict[right]
+                        if right_color==color:
+                            row=right[0]
+                            col=right[1]
+                            need_to_check=(row+1,col)
+                            if need_to_check in solve_dict.keys():
+                                possible_zig=solve_dict[need_to_check]
+                                if possible_zig==color:
+                                    is_there_a_zig_zag=True
+
+    return is_there_a_zig_zag
+
+def check_pipe_continuity(solve_dict, color, square, height, width):
+    neighbors=get_four_neighbors(square,height,width)
+    no_sq_count = 0
+    same_count = 0
+    diff_count = 0
+
+    for sq in neighbors:
+        if sq==None:
+            no_sq_count+=1
+        else:
+            if sq in solve_dict.keys():
+                testcolor = solve_dict[sq]
+                if testcolor == color:
+                    same_count += 1
+                if testcolor != color:
+                    diff_count += 1
+
+    if no_sq_count == 2:
+        # If it has 2 neighbors
+        # Then it is true if both are the same color as it, if 1 is the same and one is blank, or both are blank
+        if diff_count == 0:
+            return(True)
+        return(False)
+
+    if no_sq_count == 1:
+        # if 2 are the same, if 1 is the same and there is 1 or 2 blanks, if 0 are the same but there are 2 blanks
+
+        # Ensure its false if all 3 are the same
+        if same_count==3:
+            return(False)
+        # This case covers if 2 are the same; this is allowed
+        elif same_count == 2:
+            return(True)
+        # This case covers if 1 is the same and there are 1 or 2 blanks
+        elif same_count == 1:
+            if diff_count<=1:
+                return(True)
+        #This case covers if 0 are the same but there are 2 blanks
+        elif  same_count==0:
+            if diff_count<=1:
+                return(True)
+        return(False)
+
+    if no_sq_count == 0:
+        # IF it has 4 neighbors, then it is ok to color if
+        # 2+ Blank, or 1/2 Blank and 1/2 Same, or no blank and 2 same but not 3 same
+        if same_count == 4:
+            return (False)
+
+        elif same_count == 3:
+            return (False)
+
+        elif same_count == 2:
+            return (True)
+
+        elif same_count <= 1:
+            if diff_count < 3:
+                return(True)
+            return (False)

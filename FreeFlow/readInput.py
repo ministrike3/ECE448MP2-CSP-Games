@@ -58,7 +58,6 @@ def print_free_flow(solved_maze,height,width):
         outline.append('_')
     for i in range(0,height):
         out.append(outline[:])
-
     for key in solved_maze.keys():
         row=key[0]
         col=key[1]
