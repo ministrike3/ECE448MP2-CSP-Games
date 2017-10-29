@@ -33,6 +33,13 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
         for_this_initial=get_four_neighbors_colors_initial(solve_dict, initial_points[square], square, height, width)
         if for_this_initial==False:
             return(False)
+
+
+    for square in solve_dict.keys():
+        goodspot=is_this_a_good_spot(solve_dict,solve_dict[square],square,height,width)
+        if goodspot==False:
+            return(False)
+
     return(True)
 
 
@@ -193,3 +200,25 @@ def get_four_neighbors_colors_initial(solve_dict,color,coordinates,height,width)
             if diff_count < 4:
                 return(True)
             return(False)
+
+def is_this_a_good_spot(solve_dict,color,coordinates,height,width):
+    neighbors=get_four_neighbors(coordinates,height,width)
+    no_sq_count = 0
+    same_count = 0
+    diff_count = 0
+
+    for sq in neighbors:
+        if sq==None:
+            no_sq_count+=1
+        else:
+            if sq in solve_dict.keys():
+                testcolor = solve_dict[sq]
+                if testcolor == color:
+                    same_count += 1
+                if testcolor != color:
+                    diff_count += 1
+
+    if same_count+diff_count==4-no_sq_count:
+        if same_count==0:
+            return(False)
+    return(True)

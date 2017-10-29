@@ -39,13 +39,13 @@
       <file leaf-file-name="CSPSolving.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CSPSolving.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+            <state relative-caret-position="390">
+              <caret line="38" column="58" selection-start-line="38" selection-start-column="58" selection-end-line="38" selection-end-column="58" />
               <folding>
                 <element signature="e#145#670#0" expanded="false" />
-                <element signature="e#1858#2494#0" expanded="false" />
-                <element signature="e#2574#4409#0" expanded="false" />
-                <marker date="1509247107000" expanded="false" signature="4492:6352" ph="..." />
+                <element signature="e#2040#2676#0" expanded="false" />
+                <element signature="e#2756#4591#0" expanded="false" />
+                <marker date="1509248042000" expanded="false" signature="4674:6534" ph="..." />
               </folding>
             </state>
           </provider>
@@ -511,9 +511,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#145#670#0" expanded="false" />
-            <element signature="e#1858#2494#0" expanded="false" />
-            <element signature="e#2574#4409#0" expanded="false" />
-            <marker date="1509247107000" expanded="false" signature="4492:6352" ph="..." />
+            <element signature="e#2040#2676#0" expanded="false" />
+            <element signature="e#2756#4591#0" expanded="false" />
+            <marker date="1509248042000" expanded="false" signature="4674:6534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -544,9 +544,9 @@
           <caret line="54" column="73" selection-start-line="54" selection-start-column="73" selection-end-line="54" selection-end-column="73" />
           <folding>
             <element signature="e#145#670#0" expanded="false" />
-            <element signature="e#1858#2494#0" expanded="false" />
-            <element signature="e#2574#4409#0" expanded="false" />
-            <marker date="1509247107000" expanded="false" signature="4492:6352" ph="..." />
+            <element signature="e#2040#2676#0" expanded="false" />
+            <element signature="e#2756#4591#0" expanded="false" />
+            <marker date="1509248042000" expanded="false" signature="4674:6534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -577,9 +577,9 @@
           <caret line="54" column="73" selection-start-line="54" selection-start-column="73" selection-end-line="54" selection-end-column="73" />
           <folding>
             <element signature="e#145#670#0" expanded="false" />
-            <element signature="e#1858#2494#0" expanded="false" />
-            <element signature="e#2574#4409#0" expanded="false" />
-            <marker date="1509247107000" expanded="false" signature="4492:6352" ph="..." />
+            <element signature="e#2040#2676#0" expanded="false" />
+            <element signature="e#2756#4591#0" expanded="false" />
+            <marker date="1509248042000" expanded="false" signature="4674:6534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -610,9 +610,9 @@
           <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
             <element signature="e#145#670#0" expanded="false" />
-            <element signature="e#1858#2494#0" expanded="false" />
-            <element signature="e#2574#4409#0" expanded="false" />
-            <marker date="1509247107000" expanded="false" signature="4492:6352" ph="..." />
+            <element signature="e#2040#2676#0" expanded="false" />
+            <element signature="e#2756#4591#0" expanded="false" />
+            <marker date="1509248042000" expanded="false" signature="4674:6534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -664,13 +664,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CSPSolving.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+        <state relative-caret-position="390">
+          <caret line="38" column="58" selection-start-line="38" selection-start-column="58" selection-end-line="38" selection-end-column="58" />
           <folding>
             <element signature="e#145#670#0" expanded="false" />
-            <element signature="e#1858#2494#0" expanded="false" />
-            <element signature="e#2574#4409#0" expanded="false" />
-            <marker date="1509247107000" expanded="false" signature="4492:6352" ph="..." />
+            <element signature="e#2040#2676#0" expanded="false" />
+            <element signature="e#2756#4591#0" expanded="false" />
+            <marker date="1509248042000" expanded="false" signature="4674:6534" ph="..." />
           </folding>
         </state>
       </provider>
