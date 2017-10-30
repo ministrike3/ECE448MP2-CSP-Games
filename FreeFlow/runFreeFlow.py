@@ -7,6 +7,8 @@ import random
 
 def dumb_solver(solve_dict,height,width,color_set,initial_points):
     global assignments
+    color_list=list(color_set)
+    random.shuffle(color_list)
 
     if len(solve_dict)==height*width:
         return solve_dict
@@ -15,7 +17,7 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
 
 
     for current_coordinates in getnext:
-        for color in color_set:
+        for color in color_list:
             if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
                 assignments+=1
                 print("Put " + color + " IN " + str(current_coordinates))
@@ -72,10 +74,20 @@ if __name__ == "__main__":
 
         print("colorSet:", color_set, "colorDict:", solve_dict)
         initial_points = solve_dict.copy()
+        #THESE COMMENTS ARE IMPORTANT EVENTUALLY WE'RE SUPPOSED TO HAVE AVERAGES so I figured 10 is good
+        #average_time=0
+        #average_assignments=0
+        #for i in range(0,10):
+        solved_maze_input=solve_dict.copy()
         start=time.time()
         assignments=0
-        solved_maze=dumb_solver(solve_dict,height,width,color_set,initial_points)
+        solved_maze=dumb_solver(solved_maze_input,height,width,color_set,initial_points)
         end=time.time()
+        #average_time += (end-start)
+        #average_assignments +=assignments
+        #average_assignments=average_assignments/10
+        #average_time=average_time/10
+
         print('\n')
         print(end-start)
         print(assignments)
