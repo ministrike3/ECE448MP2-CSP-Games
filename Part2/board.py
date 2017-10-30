@@ -23,8 +23,8 @@ class board(object):
         # Pre_populates the board array with a series of zeroes
         self.board = [[0 for x in list(range(8))] for x in list(range(8))]
 
-        #Initializes the boards winner to None because in the beginning there are no zeroes
-        self.winner=None
+        #Initializes the boards winner to None because in the beginning there are no winners
+        self.winner=0
 
 
 
@@ -124,7 +124,7 @@ class board(object):
                     non_occupied.append(var)
 
             if (len(non_occupied)!=0):
-                movable_pieces[ele]=non_occupied
+                movable_pieces[ele.val]=non_occupied
 
         return(movable_pieces)
 
@@ -134,16 +134,27 @@ class board(object):
     # itself. Note that the occupied spaces variable for player 1 is adjusted as well
     def player1_move(self, piece, start, dest):
         piece.space=dest
+        #print(start)
+        #print(dest)
+        #print(self.player_1.occupied_spaces)
         self.player_1.occupied_spaces.remove(start)
         self.board[start[0]][start[1]]=0
 
         #Kills the player 2's piece if the player 1 piece moves into that space
         b_val=self.board[dest[0]][dest[1]]
-        if b_val in player_2.piece_val_array:
+        if b_val in self.player_2.piece_val_array:
             self.player_2.kill_piece(b_val)
 
         self.player_1.occupied_spaces.append(dest)
         self.board[dest[0]][dest[1]]=piece.val
+
+        # sets a winner for the board if a piece has moved into a goal state
+        if dest in self.player_1.goal_states:
+            self.winner=1
+
+        # sets a winner for the board if all the opponents pieces are dead
+        if (len(self.player_2.dead_pieces)==16):
+            self.winner=1
 
 
     # The position on the board that a player 2's piece can move to
@@ -157,11 +168,19 @@ class board(object):
 
         #Kills the player 1's piece if the player 2 piece moves into that space
         b_val=self.board[dest[0]][dest[1]]
-        if b_val in player_1.piece_val_array:
+        if b_val in self.player_1.piece_val_array:
             self.player_1.kill_piece(b_val)
 
         self.player_2.occupied_spaces.append(dest)
         self.board[dest[0]][dest[1]]=piece.val
+
+        # sets a winner for the board if a piece has moved into a goal state
+        if dest in self.player_2.goal_states:
+            self.winner=2
+
+        # sets a winner for the board if all the opponents pieces are dead
+        if (len(self.player_1.dead_pieces)==16):
+            self.winner=2
 '''
 boardA=board()
 boardB=copy.deepcopy(boardA)
@@ -176,7 +195,7 @@ for ele in boardA.player_1.pieces_array:
 for ele in boardA.player_2.pieces_array:
     print(ele.val+ "----"+ str(ele.space))
 '''
-
+'''
 boardA=board()
 boardB=deepcopy(boardA)
 mp=boardB.player2_get_movable_pieces()
@@ -191,3 +210,4 @@ print()
 print()
 for ele in boardB.board:
     print(ele)
+'''
