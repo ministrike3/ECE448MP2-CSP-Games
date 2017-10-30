@@ -11,9 +11,20 @@ def get_next_variable_to_assign(solution_set,height,width):
     #         column=random.randint(0,width-1)
     #         if (row, column) not in solution_set:
     #             yield (row, column)
+    row_array=[]
+    for i in range(0,height):
+        row_array.append(i)
+    random.shuffle(row_array)
 
-    for row in range(height):
-        for column in range(width):
+    col_array=[]
+    for i in range(0,width):
+        col_array.append(i)
+    random.shuffle(col_array)
+
+
+
+    for row in row_array:
+        for column in col_array:
             if (row, column) not in solution_set:
                 yield (row, column)
 
