@@ -64,9 +64,9 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
 # same bit set (or with neither bit set) for any allowed colour.]
 
 if __name__ == "__main__":
-    games = get_list_of_smaller_files()
+    games = get_list_of_test_files()
     #for gameboard in games:
-    gameboard=games[2]
+    gameboard=games[0]
     name = get_name(gameboard)
     useful_array_board = input_to_array(gameboard)
     height, width = puzzleDetails(useful_array_board)
