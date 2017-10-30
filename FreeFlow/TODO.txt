@@ -1,0 +1,13 @@
+General:
+
+the generator function is not random I think, that needs to be fixed
+think about more constraints as well??
+number of assignments made 
+_______
+
+Smart:
+Minimum Remaining Values
+Most Constraining Variable
+Least Constraining Variable
+Arc Consistency 
+
