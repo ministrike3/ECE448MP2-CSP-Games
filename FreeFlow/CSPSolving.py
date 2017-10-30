@@ -61,6 +61,7 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
         is_there_a_zig_zag= zig_zag_check(solve_copy,solve_copy[square], square, height, width)
         if is_there_a_zig_zag==True:
             return(False)
+
         if square not in initial_points.keys():
             cont_check=new_continuity_check(solve_copy, solve_copy[square], square, height, width)
             if cont_check==False:
