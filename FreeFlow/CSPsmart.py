@@ -2,29 +2,6 @@
 # (row,column)
 import random
 
-
-def get_next_variable_to_assign(solution_set,height,width):
-    #returns a 2-D tuple of (row, column) that DOES NOT already exist in the solution set
-    # if len(solution_set.keys())!=height*width:
-    #     while len(solution_set.keys())!=height*width:
-    #         row=random.randint(0,height-1)
-    #         column=random.randint(0,width-1)
-    #         if (row, column) not in solution_set:
-    #             yield (row, column)
-    row_array=[]
-    for i in range(0,height):
-        row_array.append(i)
-    random.shuffle(row_array)
-
-    col_array=[]
-    for i in range(0,width):
-        col_array.append(i)
-    random.shuffle(col_array)
-    for row in row_array:
-        for column in col_array:
-            if (row, column) not in solution_set:
-                yield (row, column)
-
 def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initial_points):
 
     for_location = get_four_neighbors_colors(solve_dict, color, coordinates, height, width)
@@ -393,22 +370,3 @@ def new_continuity_check(solve_dict, color, square, height, width):
         if diff_count < (3-no_sq_count):
             return(True)
     return(False)
-
-def forward_checking(solve_dict,color_set,initial_points,height,width):
-    #(row,col)
-    list_of_total_keys=[]
-    for row in range(0,height):
-        for col in range(0,width):
-            if (row,col) not in solve_dict.keys():
-                list_of_total_keys.append((row,col))
-
-    for i in list_of_total_keys:
-        if foreward_color_check(solve_dict, color_set, initial_points, i, height, width)==False:
-            return(False)
-    return(True)
-
-def foreward_color_check(solve_dict,color_set,initial_points,square,height,width):
-    for color in color_set:
-        if can_color_be_assigned_here(color, square, solve_dict, height, width, initial_points) == True:
-            return True
-    return False
