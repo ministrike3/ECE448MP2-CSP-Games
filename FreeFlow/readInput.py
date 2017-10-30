@@ -66,12 +66,10 @@ def print_free_flow(solved_maze,height,width):
 
 def print_free_flow_file(solvedMaze, height, width, time, assignments, filename):
     output_maze = open(filename, 'w')
-    printlist = []
     for y in range(height):
         blah = ''
         for x in range(width):
-            blah+=solvedMaze[(x, y)]
-            printlist.append(solvedMaze[(x, y)])
+            blah+=solvedMaze[(y, x)]
         output_maze.write(blah)
         output_maze.write('\n')
     output_maze.write('\n')

@@ -20,9 +20,6 @@ def get_next_variable_to_assign(solution_set,height,width):
     for i in range(0,width):
         col_array.append(i)
     random.shuffle(col_array)
-
-
-
     for row in row_array:
         for column in col_array:
             if (row, column) not in solution_set:
@@ -61,6 +58,7 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
         is_there_a_zig_zag= zig_zag_check(solve_copy,solve_copy[square], square, height, width)
         if is_there_a_zig_zag==True:
             return(False)
+
         if square not in initial_points.keys():
             cont_check=new_continuity_check(solve_copy, solve_copy[square], square, height, width)
             if cont_check==False:
@@ -395,3 +393,22 @@ def new_continuity_check(solve_dict, color, square, height, width):
         if diff_count < (3-no_sq_count):
             return(True)
     return(False)
+
+def forward_checking(solve_dict,color_set,initial_points,height,width):
+    #(row,col)
+    list_of_total_keys=[]
+    for row in range(0,height):
+        for col in range(0,width):
+            if (row,col) not in solve_dict.keys():
+                list_of_total_keys.append((row,col))
+
+    for i in list_of_total_keys:
+        if foreward_color_check(solve_dict, color_set, initial_points, i, height, width)==False:
+            return(False)
+    return(True)
+
+def foreward_color_check(solve_dict,color_set,initial_points,square,height,width):
+    for color in color_set:
+        if can_color_be_assigned_here(color, square, solve_dict, height, width, initial_points) == True:
+            return True
+    return False

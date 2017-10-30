@@ -1,8 +1,8 @@
-BBBBB
-RRRRB
-RYYOG
-RYOOG
-OOOGG
+BRRRO
+BRYYO
+BRYOO
+BROOG
+BBGGG
 
-Time Taken 0.05022311210632324 seconds
-Number of Assignments: 172
+Time Taken 0.046874046325683594 seconds
+Number of Assignments: 29

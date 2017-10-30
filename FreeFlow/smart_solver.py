@@ -1,11 +1,11 @@
 # In This file only write the main function. Define functions in either readInput or CSPSolving
 from readInput import *
-from CSPSolving import *
+from CSPsmart import *
 import time
 import random
 
 
-def dumb_solver(solve_dict,height,width,color_set,initial_points):
+def smart_solver(solve_dict,height,width,color_set,initial_points):
     global assignments
     color_list=list(color_set)
     random.shuffle(color_list)
@@ -23,9 +23,11 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
                 print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
                 print_free_flow(solve_dict, height, width)
-                recursive_call = dumb_solver(solve_dict,height,width,color_set,initial_points)
-                if recursive_call != None:
-                    return (recursive_call)
+
+                if forward_checking(solve_dict, color_set, initial_points, height, width):
+                    recursive_call = smart_solver(solve_dict,height,width,color_set,initial_points)
+                    if recursive_call != None:
+                        return (recursive_call)
                 print('Had to Pop '+color+' From '+str(current_coordinates))
                 solve_dict.pop(current_coordinates)
         return (None)
@@ -56,9 +58,8 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
 # Then when recursing, don't ever pick a square that has two neighbours with the
 # same bit set (or with neither bit set) for any allowed colour.]
 
-
 if __name__ == "__main__":
-    games = get_list_of_test_files()
+    games = get_list_of_smaller_files()
     for gameboard in games:
         #gameboard=games[-1]
         name = get_name(gameboard)
@@ -81,7 +82,7 @@ if __name__ == "__main__":
         solved_maze_input=solve_dict.copy()
         start=time.time()
         assignments=0
-        solved_maze=dumb_solver(solved_maze_input,height,width,color_set,initial_points)
+        solved_maze=smart_solver(solved_maze_input,height,width,color_set,initial_points)
         end=time.time()
         #average_time += (end-start)
         #average_assignments +=assignments
