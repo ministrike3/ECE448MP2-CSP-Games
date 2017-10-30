@@ -14,11 +14,12 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
     if len(solve_dict)==height*width:
         return solve_dict
 
-    getnext=get_next_variable_to_assign(solve_dict,height,width)
+    getnext=get_next_variable_to_assign(solve_dict,height,width,color_list)
 
 
-    for current_coordinates in getnext:
-        for color in color_list:
+    for pair in getnext:
+        current_coordinates=pair[0]
+        for color in pair[1]:
             if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
                 assignments+=1
                 print("Put " + color + " IN " + str(current_coordinates))
@@ -60,7 +61,7 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
 # same bit set (or with neither bit set) for any allowed colour.]
 
 if __name__ == "__main__":
-    games = get_list_of_bigger_files()
+    games = get_list_of_smaller_files()
     #for gameboard in games:
     gameboard=games[0]
     name = get_name(gameboard)

@@ -6,5 +6,5 @@ GYRRRYO
 GYRYYYO
 GYYYOOO
 
-Time Taken 0.7091519832611084 seconds
-Number of Assignments: 133
+Time Taken 84.70706391334534 seconds
+Number of Assignments: 12195
