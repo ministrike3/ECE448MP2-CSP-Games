@@ -50,6 +50,10 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
         is_there_a_zig_zag= zig_zag_check(solve_copy,solve_copy[square], square, height, width)
         if is_there_a_zig_zag==True:
             return(False)
+        if square not in initial_points.keys():
+            cont_check=new_continuity_check(solve_copy, solve_copy[square], square, height, width)
+            if cont_check==False:
+                return(False)
 
     return(True)
 
@@ -354,3 +358,29 @@ def check_pipe_continuity(solve_dict, color, square, height, width):
             if diff_count < 3:
                 return(True)
             return (False)
+
+def new_continuity_check(solve_dict, color, square, height, width):
+    neighbors = get_four_neighbors(square, height, width)
+    no_sq_count = 0
+    same_count = 0
+    diff_count = 0
+
+    for sq in neighbors:
+        if sq == None:
+            no_sq_count += 1
+        else:
+            if sq in solve_dict.keys():
+                testcolor = solve_dict[sq]
+                if testcolor == color:
+                    same_count += 1
+                if testcolor != color:
+                    diff_count += 1
+    if same_count==2:
+        return(True)
+    if same_count==1:
+        if diff_count+same_count < (4 - no_sq_count):
+            return (True)
+    if same_count==0:
+        if diff_count < (3-no_sq_count):
+            return(True)
+    return(False)
