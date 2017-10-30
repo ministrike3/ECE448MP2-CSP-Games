@@ -23,7 +23,7 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points,assignments):
                     return (recursive_call)
                 print('Had to Pop '+color+' From '+str(current_coordinates))
                 solve_dict.pop(current_coordinates)
-    return (None)
+        return (None)
 
 
 # Thoughts
