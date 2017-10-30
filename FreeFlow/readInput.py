@@ -64,16 +64,23 @@ def print_free_flow(solved_maze,height,width):
         print(line)
 
 
-def print_free_flow_file(width, height, solvedMaze, filename):
+def print_free_flow_file(solvedMaze, width, height,time,assignments, filename):
     output_maze = open(filename, 'w')
     printlist = []
-    for x in range(width):
-        for y in range(height):
-            if (x, y) not in solvedMaze:
-                printlist.append('_')
-            else:
-                printlist.append(solvedMaze[(x, y)])
-    return output_maze.write(str(printlis44t))
+    for y in range(height):
+        blah = ''
+        for x in range(width):
+            blah+=solvedMaze[(x, y)]
+            printlist.append(solvedMaze[(x, y)])
+        output_maze.write(blah)
+        output_maze.write('\n')
+    output_maze.write('\n')
+    output_maze.write('Time Taken ')
+    output_maze.write(time)
+    output_maze.write(' seconds')
+    output_maze.write('\n')
+    output_maze.write('Number of Assignments: ')
+    output_maze.write(assignments)
 
 
 
@@ -91,4 +98,3 @@ if __name__ == "__main__":
     filename = 'Outputs/%s.txt' %name
     print("colorSet:", colorSet, "colorDict:", colorDict)
     solvedMaze = print_free_flow(colorDict, width, height)
-    #print("SolvedMaze:", solvedMaze)

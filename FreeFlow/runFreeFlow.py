@@ -55,7 +55,7 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
 
 
 if __name__ == "__main__":
-    games = get_list_of_bigger_files()
+    games = get_list_of_smaller_files()
     for gameboard in games:
         #gameboard=games[-1]
         name = get_name(gameboard)
@@ -81,4 +81,6 @@ if __name__ == "__main__":
         print(solved_maze)
         print('\n')
         print_free_flow(solved_maze,height,width)
+        filename = 'Outputs/%s.txt' % name
+        print_free_flow_file(solved_maze, height, width,str(end-start),str(assignments),filename)
         print('______________________________________________')
