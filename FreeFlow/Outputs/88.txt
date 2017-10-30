@@ -7,5 +7,5 @@ YBBBBOQY
 YQQQQQQY
 YYYYYYYY
 
-Time Taken 79.8023750782013 seconds
-Number of Assignments: 2021
+Time Taken 306.56091022491455 seconds
+Number of Assignments: 1775

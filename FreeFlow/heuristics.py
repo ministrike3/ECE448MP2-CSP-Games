@@ -50,7 +50,6 @@ def get_next_variable_to_assign(solution_set,height,width,color_list,initial_poi
 
                 number_of_colors = 0
                 for color in color_list:
-                    #can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initial_points):
                     coords=(row, column)
                     if can_color_be_assigned_here(color, coords, solution_set, height, width, initial_points):
                         number_of_colors+=1
@@ -71,5 +70,39 @@ def get_next_variable_to_assign(solution_set,height,width,color_list,initial_poi
     #     for column in range(width):
     #         if (row, column) not in solution_set.keys():
     #             yield (row, column)
-def torder_of_colors():
-    pass
+def order_of_colors(solve_dict,color_list,current_coordinates,height,width,initial_points):
+
+    def get_number_of_possibilities(solve_dict,color_list,current_coordinates,height,width,initial_points):
+        counter=0
+        for row in range(0,height):
+            for column in range(0,width):
+                if (row, column) not in solve_dict:
+                    if (row,column)!=current_coordinates:
+                        for color in color_list:
+                            if can_color_be_assigned_here(color,(row,column),solve_dict,height,width,initial_points):
+                                counter+=1
+        return counter
+
+    pre_count=get_number_of_possibilities(solve_dict,color_list,current_coordinates,height,width,initial_points)
+    color_count_array=[0]*len(color_list)
+
+    for i in range(0,len(color_list)):
+        solve_dict[current_coordinates]=color_list[i]
+        color_count_array[i]=get_number_of_possibilities(solve_dict,color_list,current_coordinates,height,width,initial_points)
+        solve_dict.pop(current_coordinates)
+
+    current_max=0
+    current_max_index=0
+    list_to_return=[]
+    while len(color_list)>0:
+        for i in range(0,len(color_count_array)):
+            if color_count_array[i]>current_max:
+                current_max = color_count_array[i]
+                current_max_index = i
+        list_to_return.append(color_list[current_max_index])
+        color_list.pop(current_max_index)
+        color_count_array.pop(current_max_index)
+        current_max = 0
+        current_max_index = 0
+    return(list_to_return)
+
