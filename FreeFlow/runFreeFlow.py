@@ -5,7 +5,8 @@ import time
 
 
 
-def dumb_solver(solve_dict,height,width,color_set,initial_points,assignments):
+def dumb_solver(solve_dict,height,width,color_set,initial_points):
+    global assignments
 
     if len(solve_dict)==height*width:
         return solve_dict
@@ -15,10 +16,11 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points,assignments):
     for current_coordinates in getnext:
         for color in color_set:
             if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
+                assignments+=1
                 #print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
                 #print_free_flow(solve_dict, height, width)
-                recursive_call = dumb_solver(solve_dict,height,width,color_set,initial_points,assignments)
+                recursive_call = dumb_solver(solve_dict,height,width,color_set,initial_points)
                 if recursive_call != None:
                     return (recursive_call)
                 #print('Had to Pop '+color+' From '+str(current_coordinates))
@@ -71,7 +73,7 @@ if __name__ == "__main__":
         initial_points = solve_dict.copy()
         start=time.time()
         assignments=0
-        solved_maze=dumb_solver(solve_dict,height,width,color_set,initial_points,assignments)
+        solved_maze=dumb_solver(solve_dict,height,width,color_set,initial_points)
         end=time.time()
         print('\n')
         print(end-start)

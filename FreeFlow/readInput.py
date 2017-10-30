@@ -73,7 +73,7 @@ def print_free_flow_file(width, height, solvedMaze, filename):
                 printlist.append('_')
             else:
                 printlist.append(solvedMaze[(x, y)])
-    return output_maze.write(str(printlist))
+    return output_maze.write(str(printlis44t))
 
 
 
