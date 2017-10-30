@@ -89,39 +89,47 @@ class breakthrough(object):
         return movable_pieces
 
     def move(self,board, start, end, player):
-        #print(start)
-        #print(self.player_1_spaces)
+        print()
+        for ele in board:
+            print(ele)
+
+        print()
+        for ele in self.board:
+            print(ele)
+        print()
+        print("___________")
+        print(start)
+        print()
+        print(self.player_1_spaces)
         if player==1:
-            new_board=deepcopy(self.board)
             self.player_1_spaces.remove(start)
             self.player_1_spaces.append(end)
 
             if (board[end[0]][end[1]])=="B":
                 self.player_2_spaces.remove(end)
 
-            new_board[start[0]][start[1]]="_"
-            new_board[end[0]][end[1]]="W"
+            self.board[start[0]][start[1]]="_"
+            self.board[end[0]][end[1]]="W"
 
             if (end in self.player_1_goal_states) or len(self.player_2_spaces)==0:
                 self.winner=1
 
-            return new_board
+            return self.board
 
         elif player==2:
-            new_board=deepcopy(self.board)
             self.player_2_spaces.remove(start)
             self.player_2_spaces.append(end)
 
             if (board[end[0]][end[1]])=="W":
                 self.player_1_spaces.remove(end)
 
-            new_board[start[0]][start[1]]="_"
-            new_board[end[0]][end[1]]="B"
+            self.board[start[0]][start[1]]="_"
+            self.board[end[0]][end[1]]="B"
 
             if (end in self.player_2_goal_states) or len(self.player_2_spaces)==0:
                 self.winner=2
 
-            return new_board
+            return self.board
 
     def max_value(self,curr_board, player, depth=3):
         if depth==0:
@@ -134,7 +142,7 @@ class breakthrough(object):
                     for it in mp[ele]:
                         new_board=self.move(curr_board, ele, it, 1)
                         for ele in new_board:
-                            print(new_board)
+                            print(ele)
                         max_value=max(max_value, self.min_value(new_board,2,depth-1))
                     return max_value
             elif player==2:
@@ -163,11 +171,10 @@ class breakthrough(object):
                 min_val=10000000000000000000
                 for ele in mp:
                     for it in mp[ele]:
-                        for ele in curr_board:
-                            print(ele)
+                        print(ele)
                         new_board=self.move(curr_board,ele, it, 2)
                         max_value=min(min_value, self.max_value(new_board, 1,depth-1))
-                    return max_value
+                        return max_value
 
     def get_utility(self, board, player):
         if player==1:
