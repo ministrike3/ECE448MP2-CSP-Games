@@ -37,10 +37,10 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
         if is_there_a_zig_zag==True:
             return(False)
 
-        #if square not in initial_points.keys():
-            #cont_check=new_continuity_check(solve_copy, solve_copy[square], square, height, width)
-            #if cont_check==False:
-            #    return(False)
+        if square not in initial_points.keys():
+            cont_check=new_continuity_check(solve_copy, solve_copy[square], square, height, width)
+            if cont_check==False:
+                return(False)
 
     return(True)
 
@@ -211,16 +211,7 @@ def is_this_a_good_spot(solve_dict,color,coordinates,height,width):
     if same_count+diff_count==4-no_sq_count:
         if same_count==0:
             return(False)
-
-    if same_count==2:
-        return(True)
-    if same_count==1:
-        if diff_count+same_count < (4 - no_sq_count):
-            return (True)
-    if same_count==0:
-        if diff_count < (3-no_sq_count):
-            return(True)
-    return(False)
+    return(True)
 
 def zig_zag_check(solve_dict,color,coordinates,height,width):
     neighbors=get_four_neighbors(coordinates, height, width)
