@@ -66,7 +66,7 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
 if __name__ == "__main__":
     games = get_list_of_smaller_files()
     #for gameboard in games:
-    gameboard=games[1]
+    gameboard=games[2]
     name = get_name(gameboard)
     useful_array_board = input_to_array(gameboard)
     height, width = puzzleDetails(useful_array_board)

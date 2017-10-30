@@ -66,11 +66,11 @@ def get_next_variable_to_assign(solution_set,height,width,color_list,initial_poi
                         said_spots_number_of_neighbors=count
                         which_to_return=(row, column)
 
-                    if count==said_spots_number_of_neighbors:
-                            if not_assigned > said_spots_missing_neighbors:
-                                said_spots_missing_neighbors = not_assigned
-                                said_spots_number_of_neighbors = count
-                                which_to_return = (row, column)
+                    # if count==said_spots_number_of_neighbors:
+                    #     if not_assigned < said_spots_missing_neighbors:
+                    #         said_spots_missing_neighbors = not_assigned
+                    #         said_spots_number_of_neighbors = count
+                    #         which_to_return = (row, column)
 
                 if number_of_colors < min_of_colors:
                     said_spots_missing_neighbors = not_assigned
