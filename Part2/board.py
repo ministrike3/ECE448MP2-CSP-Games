@@ -136,6 +136,12 @@ class board(object):
         piece.space=dest
         self.player_1.occupied_spaces.remove(start)
         self.board[start[0]][start[1]]=0
+
+        #Kills the player 2's piece if the player 1 piece moves into that space
+        b_val=self.board[dest[0]][dest[1]]
+        if b_val in player_2.piece_val_array:
+            self.player_2.kill_piece(b_val)
+
         self.player_1.occupied_spaces.append(dest)
         self.board[dest[0]][dest[1]]=piece.val
 
@@ -148,6 +154,12 @@ class board(object):
         piece.space=dest
         self.player_2.occupied_spaces.remove(start)
         self.board[start[0]][start[1]]=0
+
+        #Kills the player 1's piece if the player 2 piece moves into that space
+        b_val=self.board[dest[0]][dest[1]]
+        if b_val in player_1.piece_val_array:
+            self.player_1.kill_piece(b_val)
+
         self.player_2.occupied_spaces.append(dest)
         self.board[dest[0]][dest[1]]=piece.val
 '''
