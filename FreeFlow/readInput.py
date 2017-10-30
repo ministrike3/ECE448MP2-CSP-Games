@@ -8,7 +8,7 @@ def get_list_of_test_files():
 def get_list_of_smaller_files():
     return glob.glob("./Inputs/Smaller/*")
 
-def get_list_of_smaller_files():
+def get_list_of_bigger_files():
     return glob.glob("./Inputs/Bigger/*")
 
 def get_list_of_solved_files():
@@ -38,16 +38,14 @@ def puzzleDetails(lines):
 def generateColorSet_Dict(lines):
     colorSet = []
     colorDict = {}
-    for line in lines:
-        for character in line:
+    for i in range(0,len(lines)):
+        row=lines[i]
+        for j in range(0,len(row)):
+            character=row[j]
             if character != '_':
                 colorSet.append(character)
+                colorDict[(i,j)] = character
     colorSet = set(colorSet)
-
-    for line in lines:
-        for character in line:
-            if character in colorSet:
-                colorDict[lines.index(line), line.index(character)] = character
     return colorSet, colorDict
 
 def print_free_flow(solved_maze,height,width):
@@ -80,14 +78,17 @@ def print_free_flow_file(width, height, solvedMaze, filename):
 
 
 if __name__ == "__main__":
-    games = get_list_of_solved_files()
-    for gameboard in games:
-        name = get_name(gameboard)
-        print(name)
-        useful_array_board = input_to_array(gameboard)
-        print('\n')
-        height, width = puzzleDetails(useful_array_board)
-        colorSet, colorDict = generateColorSet_Dict(useful_array_board)
-        filename = 'Outputs/%s.txt' %name
-        solvedMaze = print_free_flow_file(width, height, colorDict, filename)
-        print("SolvedMaze:", solvedMaze)
+    games = get_list_of_smaller_files()
+    gameboard=games[-1]
+    name = get_name(gameboard)
+    print(name)
+    useful_array_board = input_to_array(gameboard)
+    print('\n')
+    for row in useful_array_board:
+        print(row)
+    height, width = puzzleDetails(useful_array_board)
+    colorSet, colorDict = generateColorSet_Dict(useful_array_board)
+    filename = 'Outputs/%s.txt' %name
+    print("colorSet:", colorSet, "colorDict:", colorDict)
+    solvedMaze = print_free_flow(colorDict, width, height)
+    #print("SolvedMaze:", solvedMaze)
