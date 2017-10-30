@@ -7,7 +7,7 @@ import time
 
 def dumb_solver(solve_dict,height,width,color_set,initial_points,assignments):
 
-    if len(solve_dict)==25:
+    if len(solve_dict)==height*width:
         return solve_dict
 
     getnext=get_next_variable_to_assign(solve_dict,height,width)
@@ -15,15 +15,16 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points,assignments):
     for current_coordinates in getnext:
         for color in color_set:
             if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
-                print("Put " + color + " IN " + str(current_coordinates))
+                #print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
-                print_free_flow(solve_dict, height, width)
+                #print_free_flow(solve_dict, height, width)
                 recursive_call = dumb_solver(solve_dict,height,width,color_set,initial_points,assignments)
                 if recursive_call != None:
                     return (recursive_call)
-                print('Had to Pop '+color+' From '+str(current_coordinates))
+                #print('Had to Pop '+color+' From '+str(current_coordinates))
                 solve_dict.pop(current_coordinates)
         return (None)
+
 
 
 # Thoughts
@@ -52,16 +53,20 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points,assignments):
 
 
 if __name__ == "__main__":
-    games = get_list_of_test_files()
+    games = get_list_of_bigger_files()
     for gameboard in games:
+        #gameboard=games[-1]
         name = get_name(gameboard)
         useful_array_board = input_to_array(gameboard)
-        for row in useful_array_board:
-            print(row)
-        print('\n')
         height, width = puzzleDetails(useful_array_board)
         print("height:", height, "width:", width)
+        for row in useful_array_board:
+            print(row)
+
+        print('\n')
+
         color_set, solve_dict = generateColorSet_Dict(useful_array_board)
+
         print("colorSet:", color_set, "colorDict:", solve_dict)
         initial_points = solve_dict.copy()
         start=time.time()
@@ -71,5 +76,7 @@ if __name__ == "__main__":
         print('\n')
         print(end-start)
         print(assignments)
+        print(solved_maze)
         print('\n')
         print_free_flow(solved_maze,height,width)
+        print('______________________________________________')
