@@ -8,5 +8,5 @@ GKYYYYYPG
 GKKKKKKPG
 GGGGGGGGG
 
-Time Taken 112.91026401519775 seconds
-Number of Assignments: 7397
+Time Taken 4275.438257932663 seconds
+Number of Assignments: 63378

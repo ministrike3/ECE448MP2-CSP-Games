@@ -4,5 +4,5 @@ BRYOO
 BROOG
 BBGGG
 
-Time Taken 0.03355693817138672 seconds
-Number of Assignments: 20
+Time Taken 0.24036192893981934 seconds
+Number of Assignments: 30
