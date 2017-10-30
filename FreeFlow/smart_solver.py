@@ -14,23 +14,24 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
     if len(solve_dict)==height*width:
         return solve_dict
 
-    getnext=get_next_variable_to_assign(solve_dict,height,width,color_list)
+    getnext=get_next_variable_to_assign(solve_dict,height,width,color_list,initial_points)
 
 
-    for pair in getnext:
-        current_coordinates=pair[0]
-        for color in pair[1]:
+    for current_coordinates in getnext:
+        for color in color_list:
             if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
                 assignments+=1
-                print("Put " + color + " IN " + str(current_coordinates))
+                #print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
-                print_free_flow(solve_dict, height, width)
+                if assignments%100==0:
+                    print_free_flow(solve_dict, height, width)
+                    print('\n')
 
                 if forward_checking(solve_dict, color_set, initial_points, height, width):
                     recursive_call = smart_solver(solve_dict,height,width,color_set,initial_points)
                     if recursive_call != None:
                         return (recursive_call)
-                print('Had to Pop '+color+' From '+str(current_coordinates))
+                #print('Had to Pop '+color+' From '+str(current_coordinates))
                 solve_dict.pop(current_coordinates)
         return (None)
 

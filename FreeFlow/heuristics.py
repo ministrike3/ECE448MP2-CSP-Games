@@ -23,14 +23,15 @@ def forward_checking(solve_dict,color_set,initial_points,height,width):
             return(False)
     return(True)
 
-def get_next_variable_to_assign(solution_set,height,width,color_list):
+def get_next_variable_to_assign(solution_set,height,width,color_list,initial_points):
     #returns a 2-D tuple of (row, column) that DOES NOT already exist in the solution set
     row_array=[]
     for i in range(0,height):
         row_array.append(i)
     random.shuffle(row_array)
 
-    most_neighbors=0
+    min_of_colors=len(color_list)
+    said_spots_number_of_neighbors=0
 
     col_array=[]
     which_to_return=None
@@ -40,37 +41,31 @@ def get_next_variable_to_assign(solution_set,height,width,color_list):
     for row in row_array:
         for column in col_array:
             if (row, column) not in solution_set:
-                number_of_each_color = [0] * len(color_list)
                 count=0
                 neighbors=get_four_neighbors((row, column),height,width)
                 for i in neighbors:
                     if i != None:
                         if i in solution_set.keys():
-                            color=solution_set[i]
-                            number_of_each_color[color_list.index(color)]+=1
                             count+=1
 
-                if count>most_neighbors:
-                    best_color_list=number_of_each_color
-                    most_neighbors=count
-                    which_to_return=(row, column)
+                number_of_colors = 0
+                for color in color_list:
+                    #can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initial_points):
+                    coords=(row, column)
+                    if can_color_be_assigned_here(color, coords, solution_set, height, width, initial_points):
+                        number_of_colors+=1
 
-    order_of_colors=[]
-    max=0
-    max_index=0
-    while len(best_color_list)>0:
-        for i in best_color_list:
-            if i>max:
-                max=i
-                max_index=best_color_list.index(i)
-        order_of_colors.insert(0,color_list[max_index])
-        best_color_list.pop(max_index)
-        max=0
-        max_index=0
+                if number_of_colors==min_of_colors:
 
+                    if count>said_spots_number_of_neighbors:
+                        said_spots_number_of_neighbors=count
+                        which_to_return=(row, column)
 
+                if number_of_colors < min_of_colors:
+                    said_spots_number_of_neighbors = count
+                    which_to_return = (row, column)
 
-    yield (which_to_return,order_of_colors)
+    yield (which_to_return)
 
     # for row in range(height):
     #     for column in range(width):
