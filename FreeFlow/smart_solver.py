@@ -24,7 +24,7 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
                 assignments+=1
                 #print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
-                if assignments%25==0:
+                if assignments%50==0:
                     print_free_flow(solve_dict, height, width)
                     print('\n')
 
@@ -65,7 +65,7 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
 if __name__ == "__main__":
     games = get_list_of_smaller_files()
     #for gameboard in games:
-    gameboard=games[0]
+    gameboard=games[1]
     name = get_name(gameboard)
     useful_array_board = input_to_array(gameboard)
     height, width = puzzleDetails(useful_array_board)
