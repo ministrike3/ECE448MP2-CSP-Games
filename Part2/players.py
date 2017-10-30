@@ -39,4 +39,10 @@ class player(object):
             if ele.val==val:
                 self.occupied_spaces.remove(ele.space)
                 ele.space=-1
-                dead_pieces.append(ele_val)
+                self.dead_pieces.append(ele_val)
+
+    #Functions that returns a players piece when given the value
+    def get_piece(self,val):
+        for ele in self.pieces_array:
+            if ele.val==val:
+                return ele
