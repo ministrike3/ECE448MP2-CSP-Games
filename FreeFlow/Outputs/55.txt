@@ -1,1 +1,8 @@
-['B', '_', '_', 'R', 'O', '_', '_', '_', 'Y', '_', '_', '_', 'Y', '_', '_', '_', 'R', 'O', '_', 'G', '_', 'B', 'G', '_', '_']
+BBBBB
+RRRRB
+RYYOG
+RYOOG
+OOOGG
+
+Time Taken 0.02982497215270996 seconds
+Number of Assignments: 114

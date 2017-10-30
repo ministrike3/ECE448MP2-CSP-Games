@@ -2,7 +2,7 @@
 from readInput import *
 from CSPSolving import *
 import time
-
+import random
 
 
 def dumb_solver(solve_dict,height,width,color_set,initial_points):
@@ -13,17 +13,18 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
 
     getnext=get_next_variable_to_assign(solve_dict,height,width)
 
+
     for current_coordinates in getnext:
         for color in color_set:
             if can_color_be_assigned_here(color, current_coordinates, solve_dict,height,width,initial_points):
                 assignments+=1
-                #print("Put " + color + " IN " + str(current_coordinates))
+                print("Put " + color + " IN " + str(current_coordinates))
                 solve_dict[current_coordinates] = color
-                #print_free_flow(solve_dict, height, width)
+                print_free_flow(solve_dict, height, width)
                 recursive_call = dumb_solver(solve_dict,height,width,color_set,initial_points)
                 if recursive_call != None:
                     return (recursive_call)
-                #print('Had to Pop '+color+' From '+str(current_coordinates))
+                print('Had to Pop '+color+' From '+str(current_coordinates))
                 solve_dict.pop(current_coordinates)
         return (None)
 
@@ -55,7 +56,7 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
 
 
 if __name__ == "__main__":
-    games = get_list_of_smaller_files()
+    games = get_list_of_test_files()
     for gameboard in games:
         #gameboard=games[-1]
         name = get_name(gameboard)

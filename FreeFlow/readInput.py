@@ -64,7 +64,7 @@ def print_free_flow(solved_maze,height,width):
         print(line)
 
 
-def print_free_flow_file(solvedMaze, width, height,time,assignments, filename):
+def print_free_flow_file(solvedMaze, height, width, time, assignments, filename):
     output_maze = open(filename, 'w')
     printlist = []
     for y in range(height):
