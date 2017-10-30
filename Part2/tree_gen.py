@@ -17,7 +17,7 @@ class Node(object):
     #Function to create the chldren
     def createChildren(self):
         if self.depth>=0:
-            for i in list(range(1,3)):
+            for i in list(range(1,4)):
                 if (self.player==1):
                     #gets the dictionary
                     mp=self.board.player1_get_movable_pieces()
@@ -40,6 +40,7 @@ class Node(object):
 
                     #Creating empty child nodes
                     for num in list(range(len(adj_board))):
+                        print(str(num))
                         temp_node=Node(2, self.depth-1, adj_board[num], self.heuristic_1score(adj_board[num], 2))
                         self.children.append(temp_node)
 
@@ -65,9 +66,10 @@ class Node(object):
 
                     #Creating empty child nodes
                     for num in list(range(len(adj_board))):
-                        print(num)
+                        print(str(num))
                         temp_node=Node(1, self.depth-1, adj_board[num], self.heuristic_1score(adj_board[num],1))
                         self.children.append(temp_node)
+
 
     #function to get the heuristic scores
     def heuristic_1score(self, board, player):
