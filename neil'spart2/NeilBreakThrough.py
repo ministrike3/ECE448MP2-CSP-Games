@@ -1,4 +1,4 @@
-import random
+from random import random
 import copy
 
 '''
@@ -94,6 +94,10 @@ def move(gameboard,move_from,move_to,white_positions,black_positions,white_possi
         if move_to in black_positions:
             black_positions.pop(move_to)
             black_possible_moves.pop(move_to)
+        print(move_from)
+        print(move_to)
+        print('write white possitions')
+        print(white_positions)
         white_positions.remove(move_from)
         white_positions.append(move_to)
 
@@ -122,7 +126,7 @@ def get_utility(white_piece_locations,black_piece_locations,player_id):
             other_players_piece_locations=black_piece_locations
         else:
             other_players_piece_locations = white_piece_locations
-        return(float((30-len(other_players_piece_locations))*2)+random())
+        return((30-len(other_players_piece_locations)*2)+random())
 
 
 
