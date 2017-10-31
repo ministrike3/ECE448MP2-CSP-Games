@@ -94,8 +94,6 @@ def move(gameboard,move_from,move_to,white_positions,black_positions,white_possi
         if move_to in black_positions:
             black_positions.pop(move_to)
             black_possible_moves.pop(move_to)
-        print(white_positions)
-        print(move_from)
         white_positions.remove(move_from)
         white_positions.append(move_to)
 
@@ -119,8 +117,12 @@ def return_a_duplicate_of_the_playing_feild(gameboard,white_positions,black_posi
     return(new_gameboard,new_white_positions,new_black_positions,new_white_possible_moves,new_black_possible_moves)
 
 
-def get_utility(other_players_piece_locations):
-        return(float(len(other_players_piece_locations)*2)+random())
+def get_utility(white_piece_locations,black_piece_locations,player_id):
+        if player_id==1:
+            other_players_piece_locations=black_piece_locations
+        else:
+            other_players_piece_locations = white_piece_locations
+        return(float((30-len(other_players_piece_locations))*2)+random())
 
 
 
