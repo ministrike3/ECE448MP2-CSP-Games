@@ -89,24 +89,31 @@ class breakthrough(object):
         return movable_pieces
 
     def move(self,board, start, end, player):
-        print()
-        for ele in board:
-            print(ele)
 
-        print()
-        for ele in self.board:
-            print(ele)
-        print()
-        print("___________")
-        print(start)
-        print()
-        print(self.player_1_spaces)
         if player==1:
+            if (start in self.player_1_movable_pieces):
+                self.player_1_movable_pieces.pop(start)
             self.player_1_spaces.remove(start)
             self.player_1_spaces.append(end)
+            self.player_2_movable_pieces[end]=[]
+            new_val=[(end[0]-1,end[1]+1),(end[0],end[1]+1), (end[0]+1,end[1]+1)]
+            ok_list=[]
+            for ele in new_val:
+                if(end[0]<0 and end[0]>7):
+                    pass
+                else:
+                    ok_list.append(ele)
+
+            ok2_list=[]
+            for ele in ok_list:
+                if ele not in self.player_1_spaces:
+                    ok2_list.append(ele)
+
+            for ele in ok2_list:
+                self.player_1_movable_pieces[end].append(ele)
 
             if (board[end[0]][end[1]])=="B":
-                self.player_2_spaces.remove(end)
+                self.player_1_spaces.remove(end)
 
             self.board[start[0]][start[1]]="_"
             self.board[end[0]][end[1]]="W"
@@ -117,8 +124,26 @@ class breakthrough(object):
             return self.board
 
         elif player==2:
+            if (start in self.player_2_movable_pieces):
+                self.player_2_movable_pieces.pop(start)
             self.player_2_spaces.remove(start)
             self.player_2_spaces.append(end)
+            self.player_2_movable_pieces[end]=[]
+            new_val=[(end[0]-1,end[1]+1),(end[0],end[1]+1), (end[0]+1,end[1]+1)]
+            ok_list=[]
+            for ele in new_val:
+                if(end[0]<0 and end[0]>7):
+                    pass
+                else:
+                    ok_list.append(ele)
+
+            ok2_list=[]
+            for ele in ok_list:
+                if ele not in self.player_2_spaces:
+                    ok2_list.append(ele)
+
+            for ele in ok2_list:
+                self.player_2_movable_pieces[end].append(ele)
 
             if (board[end[0]][end[1]])=="W":
                 self.player_1_spaces.remove(end)
@@ -167,7 +192,7 @@ class breakthrough(object):
                         max_value=min(min_value, self.max_value(new_board, 2,depth-1))
                     return max_value
             elif player==2:
-                mp=self.player_1_movable_pieces
+                mp=self.player_2_movable_pieces
                 min_val=10000000000000000000
                 for ele in mp:
                     for it in mp[ele]:
