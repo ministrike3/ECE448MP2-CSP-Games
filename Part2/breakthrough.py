@@ -91,8 +91,10 @@ class breakthrough(object):
     def move(self,board, start, end, player):
 
         if player==1:
-            if (start in self.player_1_movable_pieces):
+            if (start in self.player_1_movable_pieces.keys()):
                 self.player_1_movable_pieces.pop(start)
+            print(self.player_1_spaces)
+            print(start)
             self.player_1_spaces.remove(start)
             self.player_1_spaces.append(end)
             self.player_1_movable_pieces[end]=[]
@@ -124,7 +126,7 @@ class breakthrough(object):
             return self.board
 
         elif player==2:
-            if (start in self.player_2_movable_pieces):
+            if (start in self.player_2_movable_pieces.keys()):
                 self.player_2_movable_pieces.pop(start)
             self.player_2_spaces.remove(start)
             self.player_2_spaces.append(end)
@@ -166,8 +168,8 @@ class breakthrough(object):
                 for ele in mp:
                     for it in mp[ele]:
                         new_board=self.move(curr_board, ele, it, 1)
-                        for ele in new_board:
-                            print(ele)
+                        #for ele in new_board:
+                            #print(ele)
                         max_value=max(max_value, self.min_value(new_board,2,depth-1))
                     return max_value
             elif player==2:
@@ -196,7 +198,7 @@ class breakthrough(object):
                 min_value=10000000000000000000
                 for ele in mp:
                     for it in mp[ele]:
-                        print(ele)
+                        #print(ele)
                         new_board=self.move(curr_board,ele, it, 2)
                         max_value=min(min_value, self.max_value(new_board, 1,depth-1))
                         return max_value
