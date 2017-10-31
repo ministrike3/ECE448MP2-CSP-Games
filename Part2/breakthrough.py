@@ -95,7 +95,7 @@ class breakthrough(object):
                 self.player_1_movable_pieces.pop(start)
             self.player_1_spaces.remove(start)
             self.player_1_spaces.append(end)
-            self.player_2_movable_pieces[end]=[]
+            self.player_1_movable_pieces[end]=[]
             new_val=[(end[0]-1,end[1]+1),(end[0],end[1]+1), (end[0]+1,end[1]+1)]
             ok_list=[]
             for ele in new_val:
@@ -158,7 +158,7 @@ class breakthrough(object):
 
     def max_value(self,curr_board, player, depth=3):
         if depth==0:
-            return (self.get_utility(player), self.board)
+            return self.get_utility(player)
         else:
             if player==1:
                 mp=self.player_1_movable_pieces
@@ -181,11 +181,11 @@ class breakthrough(object):
 
     def min_value(self,curr_board, player, depth):
         if depth==0:
-            return (self.get_utility(curr_board, player), curr_board)
+            return self.get_utility(curr_board, player)
         else:
             if player==1:
                 mp=self.player_1_movable_pieces
-                min_val=10000000000000000000
+                min_value=10000000000000000000
                 for ele in mp:
                     for it in mp[ele]:
                         new_board=self.move(curr_board,ele, it, 1)
@@ -193,7 +193,7 @@ class breakthrough(object):
                     return max_value
             elif player==2:
                 mp=self.player_2_movable_pieces
-                min_val=10000000000000000000
+                min_value=10000000000000000000
                 for ele in mp:
                     for it in mp[ele]:
                         print(ele)
@@ -203,10 +203,10 @@ class breakthrough(object):
 
     def get_utility(self, board, player):
         if player==1:
-            val=float(2*len(board.player_2_spaces))+random()
+            val=float(2*len(self.player_2_spaces))+random()
             return val
         elif player==2:
-            val=float(2*len(board.player_1_spaces))+random()
+            val=float(2*len(self.player_1_spaces))+random()
             return val
 
 

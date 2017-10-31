@@ -17,7 +17,7 @@ class Node(object):
     #Function to create the chldren
     def createChildren(self):
         if self.depth>=0:
-            for i in list(range(1,4)):
+            for i in list(range(1,3)):
                 if (self.player==1):
                     #gets the dictionary
                     mp=self.board.player1_get_movable_pieces()
@@ -91,7 +91,7 @@ def minimax(node, depth, player):
     if ((depth==0) or (node.board.winner==1 and player==1) or (node.board.winner==2 and player==2)):
         return (node.value)
 
-    best_score=node.heuristic_1score(node.board, player)
+    curr_score=node.heuristic_1score(node.board, player)
 
     for i in list(range(len(node.children))):
         child=node.children[i]
@@ -104,6 +104,6 @@ def minimax(node, depth, player):
         if (score<best_score):
             score=best_score
 
-        print(str(depth)+"--"+str(score))
+        print(str(node.value)+"--"+str(score))
 
     return best_score
