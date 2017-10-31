@@ -167,7 +167,7 @@ class breakthrough(object):
                 max_value=-1000000000000000000
                 for ele in mp:
                     for it in mp[ele]:
-                        new_board=self.move(curr_board, ele, it, 1)
+                        new_board=deepcopy(self.move(curr_board, ele, it, 1))
                         #for ele in new_board:
                             #print(ele)
                         max_value=max(max_value, self.min_value(new_board,2,depth-1))
@@ -177,7 +177,7 @@ class breakthrough(object):
                 max_value=-1
                 for ele in mp:
                     for it in mp[ele]:
-                        new_board=self.move(curr_board,ele, it, 2)
+                        new_board=deepcopy(self.move(curr_board,ele, it, 2))
                         max_value=Max(max_value, self.min_value(new_board,1, depth-1))
                     return max_value
 
@@ -190,7 +190,7 @@ class breakthrough(object):
                 min_value=10000000000000000000
                 for ele in mp:
                     for it in mp[ele]:
-                        new_board=self.move(curr_board,ele, it, 1)
+                        new_board=deepcopy(self.move(curr_board,ele, it, 1))
                         max_value=min(min_value, self.max_value(new_board, 2,depth-1))
                     return max_value
             elif player==2:
@@ -199,7 +199,7 @@ class breakthrough(object):
                 for ele in mp:
                     for it in mp[ele]:
                         #print(ele)
-                        new_board=self.move(curr_board,ele, it, 2)
+                        new_board=deepcopy(self.move(curr_board,ele, it, 2))
                         max_value=min(min_value, self.max_value(new_board, 1,depth-1))
                         return max_value
 
