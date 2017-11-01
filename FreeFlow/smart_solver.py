@@ -1,6 +1,6 @@
 # In This file only write the main function. Define functions in either readInput or CSPSolving
 from readInput import *
-from CSPsmart import *
+from constraints import *
 from heuristics import *
 import time
 import random
@@ -14,7 +14,7 @@ def smart_solver(solve_dict,height,width,color_set,initial_points):
     if len(solve_dict)==height*width:
         return solve_dict
 
-    getnext=get_next_variable_to_assign(solve_dict,height,width,color_list,initial_points)
+    getnext=get_next_variable_to_assign_smart(solve_dict,height,width,color_list,initial_points)
 
 
     for current_coordinates in getnext:

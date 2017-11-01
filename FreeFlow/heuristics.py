@@ -1,5 +1,5 @@
 import random
-from CSPsmart import *
+from constraints import *
 # Functions that exist in CSP smart
 #can_color_be_assigned_here
 #get_four_neighbors
@@ -23,7 +23,7 @@ def forward_checking(solve_dict,color_set,initial_points,height,width):
             return(False)
     return(True)
 
-def get_next_variable_to_assign(solution_set,height,width,color_list,initial_points):
+def get_next_variable_to_assign_smart(solution_set,height,width,color_list,initial_points):
     #returns a 2-D tuple of (row, column) that DOES NOT already exist in the solution set
     row_array=[]
     for i in range(0,height):

@@ -123,3 +123,6 @@ if __name__ == "__main__":
     litty=max_value(gameboard, white_positions, black_positions, 1, 3)
     print(litty)
 
+#
+#
+#

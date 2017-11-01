@@ -1,9 +1,33 @@
 # In This file only write the main function. Define functions in either readInput or CSPSolving
 from readInput import *
-from CSPdumb import *
+from constraints import *
 import time
 import random
 
+def get_next_variable_to_assign(solution_set,height,width):
+    #returns a 2-D tuple of (row, column) that DOES NOT already exist in the solution set
+    # if len(solution_set.keys())!=height*width:
+    #     while len(solution_set.keys())!=height*width:
+    #         row=random.randint(0,height-1)
+    #         column=random.randint(0,width-1)
+    #         if (row, column) not in solution_set:
+    #             yield (row, column)
+    row_array=[]
+    for i in range(0,height):
+        row_array.append(i)
+    random.shuffle(row_array)
+
+    col_array=[]
+    for i in range(0,width):
+        col_array.append(i)
+    random.shuffle(col_array)
+
+
+
+    for row in row_array:
+        for column in col_array:
+            if (row, column) not in solution_set:
+                yield (row, column)
 
 def dumb_solver(solve_dict,height,width,color_set,initial_points):
     global assignments
@@ -31,7 +55,7 @@ def dumb_solver(solve_dict,height,width,color_set,initial_points):
         return (None)
 
 if __name__ == "__main__":
-    games = get_list_of_test_files()
+    games = get_list_of_smaller_files()
     for gameboard in games:
         #gameboard=games[-1]
         name = get_name(gameboard)
