@@ -28,10 +28,9 @@ def can_color_be_assigned_here(color, coordinates, solve_dict,height,width,initi
     solve_copy[coordinates] = color
 
     for square in solve_copy.keys():
-        if square not in initial_points.keys():
-            goodspot=is_this_a_good_spot(solve_copy,solve_copy[square],square,height,width)
-            if goodspot==False:
-                return(False)
+        goodspot=is_this_a_good_spot(solve_copy,solve_copy[square],square,height,width)
+        if goodspot==False:
+            return(False)
 
         is_there_a_zig_zag= zig_zag_check(solve_copy,solve_copy[square], square, height, width)
         if is_there_a_zig_zag==True:
@@ -362,7 +361,6 @@ def new_continuity_check(solve_dict, color, square, height, width):
                     same_count += 1
                 if testcolor != color:
                     diff_count += 1
-
     if same_count==2:
         return(True)
     if same_count==1:
